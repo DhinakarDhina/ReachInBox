@@ -1,0 +1,63 @@
+{
+  "name": "backend-engineering-assignment",
+  "version": "1.0.0",
+  "description": "A backend application for real-time email synchronization and AI-based categorization.",
+  "main": "src/server.ts",
+  "scripts": {
+    "start": "ts-node src/server.ts",
+    "dev": "ts-node-dev src/server.ts",
+    "test": "jest",
+    "migrate": "sh scripts/migrate.sh"
+  },
+  "dependencies": {
+    "@elastic/elasticsearch": "^9.1.1",
+    "@slack/web-api": "^7.11.0",
+    "@slack/webhook": "^7.0.6",
+    "axios": "^1.12.2",
+    "bull": "^4.16.5",
+    "dotenv": "^10.0.0",
+    "elasticsearch": "^16.7.1",
+    "express": "^4.17.1",
+    "google-auth-library": "^10.4.1",
+    "imap": "^0.8.17",
+    "jsonwebtoken": "^9.0.2",
+    "mailparser": "^3.7.5",
+    "mongoose": "^8.19.1",
+    "nodemailer": "^7.0.9",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "pg": "^8.16.3",
+    "socket.io": "^4.0.0",
+    "winston": "^3.18.3"
+  },
+  "devDependencies": {
+    "@types/bull": "^3.15.9",
+    "@types/express": "^5.0.3",
+    "@types/imap": "^0.8.42",
+    "@types/jest": "^27.0.2",
+    "@types/mailparser": "^3.4.6",
+    "@types/mongoose": "^5.11.96",
+    "@types/node": "^16.11.7",
+    "@types/nodemailer": "^7.0.2",
+    "@types/pg": "^8.15.5",
+    "@types/winston": "^2.4.4",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^7.32.0",
+    "jest": "^27.0.6",
+    "prettier": "^2.4.1",
+    "ts-node": "^10.4.0",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.4.4"
+  },
+  "keywords": [
+    "email",
+    "synchronization",
+    "AI",
+    "Elasticsearch",
+    "Slack",
+    "webhook"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
