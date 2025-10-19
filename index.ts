@@ -1,16 +1,37 @@
-import { Queue } from 'bull';
-import { redisClient } from '../config'; // Assuming you have a Redis client configured
+export interface Email {
+    id: string;
+    subject: string;
+    body: string;
+    sender: string;
+    recipient: string;
+    timestamp: Date;
+    category?: string;
+}
 
-const emailQueue = new Queue('emailQueue', {
-  redis: redisClient,
-});
+export interface User {
+    id: string;
+    email: string;
+    name: string;
+    passwordHash: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
 
-const aiQueue = new Queue('aiQueue', {
-  redis: redisClient,
-});
+export interface SuggestedReply {
+    id: string;
+    replyText: string;
+    emailId: string;
+}
 
-const notificationQueue = new Queue('notificationQueue', {
-  redis: redisClient,
-});
+export interface Integration {
+    id: string;
+    type: 'slack' | 'webhook';
+    config: Record<string, any>;
+}
 
-export { emailQueue, aiQueue, notificationQueue };
+export interface Config {
+    port: number;
+    dbUrl: string;
+    elasticsearchUrl: string;
+    slackWebhookUrl?: string;
+}
