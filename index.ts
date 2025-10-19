@@ -1,29 +1,34 @@
-import { config as dotenvConfig } from 'dotenv';
+import { Pool } from 'pg';
+import { Client } from '@elastic/elasticsearch';
+import { config } from '../config';
 
-dotenvConfig();
+const dbPool = new Pool({
+  user: config.DB_USER,
+  host: config.DB_HOST,
+  database: config.DB_NAME,
+  password: config.DB_PASSWORD,
+  port: config.DB_PORT,
+});
 
-const config = {
-  port: process.env.PORT || 3000,
-  db: {
-    host: process.env.DB_HOST || 'localhost',
-    port: process.env.DB_PORT || 5432,
-    user: process.env.DB_USER || 'user',
-    password: process.env.DB_PASSWORD || 'password',
-    database: process.env.DB_NAME || 'database',
-  },
-  elasticsearch: {
-    host: process.env.ELASTICSEARCH_HOST || 'http://localhost:9200',
-  },
-  oauth: {
-    clientId: process.env.OAUTH_CLIENT_ID || '',
-    clientSecret: process.env.OAUTH_CLIENT_SECRET || '',
-  },
-  slack: {
-    webhookUrl: process.env.SLACK_WEBHOOK_URL || '',
-  },
-  webhook: {
-    url: process.env.WEBHOOK_URL || '',
-  },
+const esClient = new Client({
+  node: config.ELASTICSEARCH_URL,
+});
+
+export const connectToDatabase = async () => {
+  try {
+    await dbPool.connect();
+    console.log('Connected to the database');
+  } catch (error) {
+    console.error('Database connection error:', error);
+    throw error;
+  }
 };
 
-export default config;
+export const getDbPool = () => dbPool;
+
+export const getEsClient = () => esClient;
+
+export const closeDatabaseConnection = async () => {
+  await dbPool.end();
+  console.log('Database connection closed');
+};
